@@ -12,3 +12,11 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model Task {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  comment String?
+  done     Boolean
+  user_id String    @db.ObjectId
+}
