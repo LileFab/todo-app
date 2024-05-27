@@ -18,5 +18,7 @@ model Task {
   title    String
   comment String?
   done     Boolean
-  user_id String    @db.ObjectId
+  user_id String   
+  creation_date   DateTime @db.Timestamp() @default(now())
+  position  Int
 }
