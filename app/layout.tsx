@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs'
+import Navbar from "./components/Navbar";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -15,8 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={roboto.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="bg-timberwolf">
+        <body className={roboto.className}>
+          <Navbar/>
+            {children}
+          </body>
+      </html>
+    </ClerkProvider>
   );
 }
