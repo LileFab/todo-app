@@ -1,30 +1,30 @@
 "use server";
 
 import { prisma } from "@/utils/prisma";
-import TaskObject from "../interfaces/TaskInterface";
+import TaskObject from "@/app/interfaces/TaskInterface";
 
 const getLastTaskPositionByUserId = async (_user_id: string) => {
-  const lastPosTask: TaskObject | null = await prisma.task.findFirst({
+  const lastPosTask: TaskObject | null = (await prisma.task.findFirst({
     where: {
       user_id: _user_id,
     },
     orderBy: {
       position: "desc",
     },
-  });
+  })) as TaskObject;
 
   return lastPosTask ? (lastPosTask.position as number) : 0;
 };
 
 export async function getAllTasksByUserId(_user_id: string) {
-  const userTasks: TaskObject[] = await prisma.task.findMany({
+  const userTasks: TaskObject[] = (await prisma.task.findMany({
     where: {
       user_id: _user_id,
     },
     orderBy: {
       position: "desc",
     },
-  });
+  })) as TaskObject[];
 
   return userTasks.length > 0
     ? (userTasks as TaskObject[])
