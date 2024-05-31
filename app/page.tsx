@@ -1,4 +1,4 @@
-import { Abril_Fatface } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import { currentUser } from "@clerk/nextjs/server";
 import TaskCard from "./components/TaskCard";
 import TaskObject from "./interfaces/TaskInterface";
@@ -11,7 +11,7 @@ type SearchParamProps = {
   searchParams: Record<string, string> | null | undefined;
 };
 
-const abril = Abril_Fatface({ subsets: ["latin"], weight: ["400"] });
+const abril = Playfair_Display({ subsets: ["latin"], weight: ["400"] });
 
 // Define the return type explicitly
 const getData: () => Promise<[any, TaskObject[]]> = async () => {
@@ -38,9 +38,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
       {user && (
         <>
           <h1 className={`${abril.className} text-5xl mb-12`}>
-            &#9207; Vos tâches {user?.firstName}&#9207;
+            &#9207; Vos tâches {user?.firstName} &#9207;
           </h1>
-          {/* // faire une modal pour la création en use client dans le page.tsx de / */}
           <Link href="/?show=true">
             <Button text="Ouvrir la modal" />
           </Link>
